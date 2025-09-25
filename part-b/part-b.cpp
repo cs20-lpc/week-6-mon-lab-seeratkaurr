@@ -7,20 +7,23 @@ using namespace std;
  * Function prototype
 *******************************************************************************/
 
-void towerHanoi(int, string, string, string, int&);
+void towerHanoi(int numDisks, string source, string buffer, string target, int& numMoves);
 
-/*******************************************************************************
- * Description:
- * Starting point of the program. Calls a function to recursively determine
- * solutions for the first 5 instances of the Tower of Hanoi problem.
- * 
- * Input:
- * N/A
- *
- * Output:
- * An integer to signal to the OS the exit code.
-*******************************************************************************/
 
+void towerHanoi(int numDisks, string source, string buffer, string target, int& numMoves) {
+    if (numDisks == 1) {
+        cout << "Moving disc 1 from " << source << " to " << target << endl;
+        numMoves++;
+        return;
+    }
+
+    towerHanoi(numDisks - 1, source, target, buffer, numMoves);
+
+    cout << "Moving disc " << numDisks << " from " << source << " to " << target << endl;
+    numMoves++;
+
+    towerHanoi(numDisks - 1, buffer, source, target, numMoves);
+}
 int main() {
     // solve the first 5 cases of the Tower of Hanoi problem
     for (int i = 1, numMoves = 0; i <= 5; i++, numMoves = 0) {
@@ -33,3 +36,4 @@ int main() {
     // terminate
     return 0;
 }
+
